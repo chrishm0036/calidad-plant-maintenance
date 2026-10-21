@@ -510,6 +510,16 @@ h2 {
   transform: translateY(-1px);
 }
 
+.job.overdue {
+  border-color: #e6aaa5;
+  background: #fffafa;
+}
+
+.due-date.overdue {
+  color: var(--critical);
+  font-weight: 750;
+}
+
 .job-top,
 .job-bottom {
   display: flex;

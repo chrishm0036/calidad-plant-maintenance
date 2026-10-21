@@ -26,7 +26,16 @@ def test_create_job(service, request_data):
     assert job.status == "open"
     assert job.location == "Unspecified"
     assert job.technician == "Unassigned"
+    assert job.due_date is None
     assert job.created_at.utcoffset().total_seconds() == 0
+
+
+def test_create_job_with_due_date(service):
+    request = CreateJobRequest(
+        customer_name="Line 3", description="Cooling alert", due_date="2026-11-05",
+    )
+    job = service.create_job(request)
+    assert job.due_date.isoformat() == "2026-11-05"
 
 
 def test_get_existing_job(service, request_data):

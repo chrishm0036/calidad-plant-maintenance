@@ -1,6 +1,6 @@
 """Validated API and domain models."""
-from datetime import datetime, timezone
-from typing import Literal
+from datetime import date, datetime, timezone
+from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -15,6 +15,7 @@ class CreateJobRequest(BaseModel):
     priority: Priority = "normal"
     location: str = Field(default="Unspecified", min_length=1, max_length=180)
     technician: str = Field(default="Unassigned", min_length=1, max_length=120)
+    due_date: Optional[date] = None
 
 
 class Job(CreateJobRequest):

@@ -38,19 +38,30 @@ def test_create_job(client):
     response = client.post("/jobs", json={
         "customer_name": "Test customer", "description": "New incident",
         "priority": "high", "location": "Madrid", "technician": "Elena",
+        "due_date": "2026-11-05",
     })
     assert response.status_code == 201
     job = response.json()
     assert job["id"] == 7
     assert job["status"] == "open"
+    assert job["due_date"] == "2026-11-05"
     assert client.get("/jobs/7").json() == job
     assert len(client.get("/jobs").json()) == 7
+
+
+def test_create_job_without_due_date_defaults_to_none(client):
+    response = client.post("/jobs", json={
+        "customer_name": "Test customer", "description": "New incident",
+    })
+    assert response.status_code == 201
+    assert response.json()["due_date"] is None
 
 
 @pytest.mark.parametrize("payload", [
     {}, {"customer_name": " ", "description": "Issue"},
     {"customer_name": "Customer", "description": "Issue", "priority": "urgent"},
     {"customer_name": "Customer", "description": "Issue", "status": "closed"},
+    {"customer_name": "Customer", "description": "Issue", "due_date": "not-a-date"},
 ])
 def test_invalid_create_leaves_store_unchanged(client, payload):
     assert client.post("/jobs", json=payload).status_code == 422

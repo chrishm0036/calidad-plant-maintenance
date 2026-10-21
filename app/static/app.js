@@ -6,6 +6,9 @@ const byId = (id) => document.getElementById(id);
 const dateFormat = new Intl.DateTimeFormat(undefined, {
   month: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
 });
+const dueDateFormat = new Intl.DateTimeFormat(undefined, {
+  year: "numeric", month: "short", day: "numeric", timeZone: "UTC",
+});
 
 function render() {
   const openJobs = jobs.filter((job) => job.status === "open");
@@ -30,6 +33,21 @@ function render() {
     set(".technician", job.technician);
     set(".priority", job.priority.charAt(0).toUpperCase() + job.priority.slice(1));
     card.querySelector(".priority").classList.add(job.priority);
+    const dueDate = card.querySelector(".due-date");
+    if (job.due_date) {
+      const [year, month, day] = job.due_date.split("-").map(Number);
+      dueDate.textContent = `Due ${dueDateFormat.format(new Date(Date.UTC(year, month - 1, day)))}`;
+      const today = new Date();
+      const todayISO = [today.getFullYear(), today.getMonth() + 1, today.getDate()]
+        .map((part) => String(part).padStart(2, "0")).join("-");
+      if (job.due_date < todayISO) {
+        dueDate.textContent = `Overdue · ${dueDate.textContent}`;
+        dueDate.classList.add("overdue");
+        card.querySelector(".job").classList.add("overdue");
+      }
+    } else {
+      dueDate.parentElement.hidden = true;
+    }
     const time = card.querySelector("time");
     time.dateTime = job.created_at;
     time.textContent = dateFormat.format(new Date(job.created_at));
