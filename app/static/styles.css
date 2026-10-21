@@ -591,6 +591,10 @@ h3 {
   font-size: 12px;
 }
 
+.job-details .due-row[hidden] {
+  display: none;
+}
+
 .detail-symbol,
 .person-icon {
   display: inline-grid;

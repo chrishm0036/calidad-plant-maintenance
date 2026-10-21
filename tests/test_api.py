@@ -46,6 +46,7 @@ def test_create_job(client):
     assert job["status"] == "open"
     assert job["due_date"] == "2026-11-05"
     assert client.get("/jobs/7").json() == job
+    assert client.get("/jobs").json()[-1]["due_date"] == "2026-11-05"
     assert len(client.get("/jobs").json()) == 7
 
 
