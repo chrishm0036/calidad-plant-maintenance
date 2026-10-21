@@ -281,6 +281,8 @@ h3.description { margin: 0; color: #182f36; font-size: 20px; font-weight: 720; l
 .job-details { display: grid; gap: 6px; margin: 16px 0 18px; }
 .job-details p { display: flex; align-items: flex-start; gap: 9px; margin: 0; color: #435a60; font-size: 15px; line-height: 1.4; }
 .detail-symbol, .person-icon { width: 18px; flex: 0 0 18px; color: #56757a; text-align: center; }
+.detail-symbol { display: inline-grid; place-items: center; font-size: 0; }
+.detail-symbol::before { width: 8px; height: 8px; border: 2px solid currentColor; border-radius: 50% 50% 50% 0; content: ""; transform: rotate(-45deg); }
 .job-bottom { padding-top: 12px; border-top: 1px solid #e6eceb; color: #53676d; font-size: 13px; }
 .status { display: inline-flex; align-items: center; gap: 7px; color: #17634e; font-weight: 700; }
 .status .dot { width: 8px; height: 8px; background: #21845f; }
