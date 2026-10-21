@@ -55,3 +55,9 @@ def test_create_job(client):
 def test_invalid_create_leaves_store_unchanged(client, payload):
     assert client.post("/jobs", json=payload).status_code == 422
     assert len(client.get("/jobs").json()) == 6
+
+
+def test_jobs_can_be_filtered_by_priority(client):
+    critical = client.get("/jobs", params={"priority": "critical"}).json()
+    assert critical and all(job["priority"] == "critical" for job in critical)
+    assert client.get("/jobs", params={"priority": "urgent"}).status_code == 422

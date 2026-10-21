@@ -1,11 +1,13 @@
 """Thin HTTP routes and static dashboard hosting."""
 from pathlib import Path
 
+from typing import Optional
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.models import CreateJobRequest, Job
+from app.models import CreateJobRequest, Job, Priority
 from app.service import JobService
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
@@ -25,8 +27,11 @@ def health():
 
 
 @app.get("/jobs", response_model=list[Job])
-def list_jobs():
-    return service.list_jobs()
+def list_jobs(priority: Optional[Priority] = None):
+    jobs = service.list_jobs()
+    if priority is None:
+        return jobs
+    return [job for job in jobs if job.priority == priority]
 
 
 @app.get("/jobs/{job_id}", response_model=Job)
