@@ -62,6 +62,8 @@ def test_create_job_without_due_date_defaults_to_none(client):
     {"customer_name": "Customer", "description": "Issue", "priority": "urgent"},
     {"customer_name": "Customer", "description": "Issue", "status": "closed"},
     {"customer_name": "Customer", "description": "Issue", "due_date": "not-a-date"},
+    {"customer_name": "Customer", "description": "Issue", "due_date": "2026-11-05T00:00:00"},
+    {"customer_name": "Customer", "description": "Issue", "due_date": 1793836800},
 ])
 def test_invalid_create_leaves_store_unchanged(client, payload):
     assert client.post("/jobs", json=payload).status_code == 422

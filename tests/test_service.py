@@ -73,6 +73,8 @@ def test_supported_priorities(service, priority):
     ("technician", ""), ("priority", "urgent"), ("customer_name", "x" * 121),
     ("description", "x" * 1001), ("location", "x" * 181), ("technician", "x" * 121),
     ("status", "closed"), ("unexpected", "value"),
+    ("due_date", "2026-11-05T00:00:00"), ("due_date", "20261105"),
+    ("due_date", 1793836800),
 ])
 def test_invalid_input(field, value):
     data = {"customer_name": "Customer", "description": "Issue", field: value}
