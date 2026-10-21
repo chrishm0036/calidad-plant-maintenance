@@ -1,0 +1,33 @@
+/* Plant Maintenance - operations dashboard
+   Baseline stylesheet. Functional, not designed. */
+
+body { font-family: Times, "Times New Roman", serif; margin: 12px; color: #000; background: #fff; }
+a { color: #0000ee; }
+
+.topbar { border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 10px; font-size: 13px; }
+.brand-icon, .avatar, .brand-divider { font-weight: bold; }
+.region { margin-left: 12px; }
+
+h1 { font-size: 18px; margin: 6px 0; }
+h2 { font-size: 15px; margin: 10px 0 4px; }
+h3 { font-size: 13px; margin: 2px 0; font-weight: bold; }
+.eyebrow, .subtitle, .live { font-size: 11px; }
+
+.metrics { margin: 8px 0; }
+.metric { display: inline-block; border: 1px solid #999; padding: 4px 8px; margin: 0 6px 6px 0; vertical-align: top; }
+.metric-label { font-size: 11px; }
+.metric strong { display: block; font-size: 16px; }
+.metric p { font-size: 10px; margin: 0; }
+
+.toolbar { margin: 6px 0; }
+.filters button, .refresh { font-family: inherit; font-size: 12px; margin-right: 4px; }
+.search input { font-family: inherit; font-size: 12px; }
+
+.jobs { margin-top: 6px; }
+.job { border: 1px solid #999; padding: 6px 8px; margin-bottom: 6px; }
+.job-top, .job-details, .job-footer { font-size: 11px; }
+.badge { border: 1px solid #666; padding: 0 4px; font-size: 10px; }
+.customer { font-size: 11px; margin: 2px 0; }
+
+.notice, .list-footer, .page-footer { font-size: 11px; margin-top: 8px; }
+.page-footer { border-top: 1px solid #000; padding-top: 4px; }
